@@ -11,7 +11,7 @@ import 'otp_page.dart';
 /// 1. Validate Robi/Airtel number.
 /// 2. Check subscription — if REGISTERED, jump straight to home.
 /// 3. Otherwise call send_otp.php and push the OTP page.
-/// UI uses the Calendar Wala purple gradient language.
+/// UI uses the Reminder 24 purple gradient language.
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -63,7 +63,14 @@ class _LoginPageState extends State<LoginPage> {
       final data = await _auth.sendOtp(phone);
       if (!mounted) return;
 
-      final refNo = data['referenceNo']?.toString().trim() ?? '';
+      final refNo =
+          (data['referenceNo'] ??
+                  data['reference_no'] ??
+                  data['referenceID'] ??
+                  data['reference_id'])
+              ?.toString()
+              .trim() ??
+              '';
       final code = data['statusCode']?.toString().trim() ?? '';
       final msg = data['message']?.toString() ?? '';
 
@@ -88,7 +95,8 @@ class _LoginPageState extends State<LoginPage> {
       } else {
         _snack(msg.isNotEmpty ? msg : 'Could not send OTP');
       }
-    } catch (_) {
+    } catch (e) {
+      debugPrint('Login network error: $e');
       _snack('Network problem. Please try again.');
     } finally {
       if (mounted) setState(() => _loading = false);
@@ -129,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                         const CalendarLogo(size: 96),
                         const SizedBox(height: 18),
                         const Text(
-                          'Welcome to Calendar Wala',
+                          'Welcome to Reminder 24',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,

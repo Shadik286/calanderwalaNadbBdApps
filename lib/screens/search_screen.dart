@@ -193,10 +193,10 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             // Filter chips.
             SizedBox(
-              height: 50,
+              height: 56,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
                 children: [
                   _filterChip(
                     label: _dateFilter == null

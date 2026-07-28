@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Centralized color tokens and theme builders for Calendar Wala. Keeping
+/// Centralized color tokens and theme builders for Reminder 24. Keeping
 /// these in one file makes it easy to keep light + dark in sync.
 class AppPalette {
   static const seed = Color(0xFF6C63FF);

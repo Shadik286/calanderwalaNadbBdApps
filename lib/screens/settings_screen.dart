@@ -38,7 +38,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           style: TextStyle(fontWeight: FontWeight.w700),
         ),
         content: const Text(
-          'Your Calendar Wala subscription will be cancelled and you will be logged out. This cannot be undone.',
+          'Your Reminder 24 subscription will be cancelled and you will be logged out. This cannot be undone.',
           style: TextStyle(fontSize: 14, height: 1.5),
         ),
         actions: [
@@ -122,7 +122,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: GradientHeader(
                     height: 130,
                     title: 'Settings',
-                    subtitle: 'Customize how Calendar Wala works for you',
+                    subtitle: 'Customize how Reminder 24 works for you',
                   ),
                 ),
                 SliverPadding(
@@ -192,7 +192,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               Icons.event_note_rounded,
                               color: scheme.primary,
                             ),
-                            title: const Text('Calendar Wala'),
+                            title: const Text('Reminder 24'),
                             subtitle: const Text(
                               'Version 1.0.0 • Built with Flutter',
                             ),
@@ -216,7 +216,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             title: const Text('Enjoying the app?'),
                             subtitle: const Text(
-                              'Rate Calendar Wala on the Play Store.',
+                              'Rate Reminder 24 on the Play Store.',
                             ),
                             onTap: () {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -417,7 +417,7 @@ class _AccountSection extends StatelessWidget {
                   leading: Icon(Icons.person_rounded, color: scheme.primary),
                   title: const Text('Signed in as'),
                   subtitle: Text(
-                    info.name.isNotEmpty ? info.name : 'Calendar Wala user',
+                    info.name.isNotEmpty ? info.name : 'Reminder 24 user',
                     style: const TextStyle(fontWeight: FontWeight.w600),
                   ),
                 ),

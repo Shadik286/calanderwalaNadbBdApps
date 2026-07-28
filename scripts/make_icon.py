@@ -1,4 +1,4 @@
-"""Generate a calendar + note themed app icon for Calanderwala.
+"""Generate a calendar + note themed app icon for Reminder 24.
 
 Renders a teal rounded-square background with a white calendar card
 overlapping a yellow note card. Used to update web/Android/macOS icons.

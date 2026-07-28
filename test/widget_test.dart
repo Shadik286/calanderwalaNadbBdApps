@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:calendar_wala/main.dart';
+import 'package:reminder_24/main.dart';
 
 void main() {
   testWidgets('Splash screen shows app name', (WidgetTester tester) async {
-    await tester.pumpWidget(const CalendarWalaApp());
+    await tester.pumpWidget(const Reminder24App());
 
-    expect(find.text('Calendar Wala'), findsOneWidget);
+    expect(find.text('Reminder 24'), findsOneWidget);
   });
 }

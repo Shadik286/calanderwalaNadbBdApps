@@ -104,7 +104,7 @@ class _ProfileSetupPageState extends State<ProfileSetupPage> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 24),
                           child: Text(
-                            'Tell us your name so Calendar Wala can greet you.',
+                            'Tell us your name so Reminder 24 can greet you.',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white.withOpacity(0.88),

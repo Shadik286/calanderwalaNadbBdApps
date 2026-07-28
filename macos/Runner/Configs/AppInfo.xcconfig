@@ -5,10 +5,10 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = calendar_wala
+PRODUCT_NAME = Reminder 24
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.calendarwala.calendarWala
+PRODUCT_BUNDLE_IDENTIFIER = com.calendarwala.reminder24
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2026 com.calendarwala. All rights reserved.

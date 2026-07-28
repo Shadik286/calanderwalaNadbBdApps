@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.calendarwala" "\0"
-            VALUE "FileDescription", "calendar_wala" "\0"
+            VALUE "FileDescription", "Reminder 24" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "calendar_wala" "\0"
+            VALUE "InternalName", "reminder_24" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 com.calendarwala. All rights reserved." "\0"
-            VALUE "OriginalFilename", "calendar_wala.exe" "\0"
-            VALUE "ProductName", "calendar_wala" "\0"
+            VALUE "OriginalFilename", "reminder_24.exe" "\0"
+            VALUE "ProductName", "Reminder 24" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

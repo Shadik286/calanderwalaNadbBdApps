@@ -91,7 +91,7 @@ class _SplashScreenState extends State<SplashScreen>
                       child: Column(
                         children: [
                           const Text(
-                            'Calendar Wala',
+                            'Reminder 24',
                             style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.w800,

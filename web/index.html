@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#6C63FF" />
-  <meta name="description" content="Reminder24 (Calendar Wala) — the smart Bangla calendar + reminder app for Robi and Airtel subscribers. Track notes, tasks and reminders in one place." />
-  <title>Reminder24 — Calendar Wala</title>
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <meta name="description" content="Reminder 24 — the smart Bangla calendar + reminder app for Robi and Airtel subscribers. Track notes, tasks and reminders in one place." />
+  <title>Reminder 24</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236C63FF'/%3E%3Cstop offset='1' stop-color='%238E84FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Crect x='14' y='18' width='36' height='32' rx='5' fill='none' stroke='%23fff' stroke-width='3'/%3E%3Cline x1='14' y1='28' x2='50' y2='28' stroke='%23fff' stroke-width='3'/%3E%3Cline x1='24' y1='12' x2='24' y2='22' stroke='%23fff' stroke-width='3.5' stroke-linecap='round'/%3E%3Cline x1='40' y1='12' x2='40' y2='22' stroke='%23fff' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -403,6 +403,289 @@
       background: var(--accent);
     }
 
+    /* ---------- Subscribe form ---------- */
+    .sub-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 14px 30px -22px rgba(72, 52, 212, 0.3);
+    }
+
+    .sub-card h3 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      margin-bottom: 4px;
+    }
+
+    .sub-card .sub-hint {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .sub-stepper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .sub-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      background: rgba(108, 99, 255, 0.1);
+      color: var(--seed-dark);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .sub-pill .pdot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--seed);
+    }
+
+    .sub-pill.done {
+      background: rgba(16, 185, 129, 0.12);
+      color: #047857;
+    }
+    .sub-pill.done .pdot { background: #10B981; }
+
+    .sub-pill.active {
+      background: var(--seed);
+      color: #fff;
+    }
+    .sub-pill.active .pdot { background: #fff; }
+
+    .sub-pill .arrow {
+      font-size: 12px;
+      opacity: 0.6;
+    }
+
+    .field-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.3px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .phone-input {
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 0 14px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .phone-input:focus-within {
+      border-color: var(--seed);
+      box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.15);
+    }
+
+    .phone-input .prefix {
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 16px;
+      padding-right: 8px;
+      border-right: 1.5px solid var(--border);
+    }
+
+    .phone-input input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 14px 0 14px 12px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: inherit;
+      color: var(--text);
+      outline: none;
+      letter-spacing: 1px;
+    }
+
+    .phone-input input::placeholder {
+      color: #B8B5C8;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .otp-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .otp-row input {
+      flex: 1;
+      min-width: 0;
+      text-align: center;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 0;
+      font-size: 22px;
+      font-weight: 800;
+      font-family: inherit;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+
+    .otp-row input:focus {
+      border-color: var(--seed);
+      box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.15);
+      background: #fff;
+    }
+
+    .otp-row input.filled {
+      border-color: var(--seed);
+      background: rgba(108, 99, 255, 0.06);
+    }
+
+    .sub-btn {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--seed-light), var(--seed));
+      color: #fff;
+      box-shadow: 0 10px 22px -10px rgba(108, 99, 255, 0.55);
+      transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .sub-btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px -10px rgba(108, 99, 255, 0.65);
+    }
+
+    .sub-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .sub-btn.ghost {
+      background: transparent;
+      color: var(--seed);
+      box-shadow: none;
+      border: 1.5px solid var(--border);
+      margin-top: 10px;
+    }
+
+    .sub-btn.ghost:hover:not(:disabled) {
+      background: rgba(108, 99, 255, 0.06);
+      box-shadow: none;
+      transform: none;
+    }
+
+    .sub-link {
+      display: block;
+      text-align: center;
+      margin-top: 12px;
+      color: var(--seed);
+      font-size: 13px;
+      font-weight: 600;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      padding: 4px;
+    }
+
+    .sub-link:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .sub-msg {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      font-weight: 500;
+      display: none;
+    }
+
+    .sub-msg.show { display: block; }
+
+    .sub-msg.err {
+      background: rgba(239, 68, 68, 0.08);
+      color: #B91C1C;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .sub-msg.ok {
+      background: rgba(16, 185, 129, 0.08);
+      color: #047857;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .sub-success {
+      text-align: center;
+      padding: 8px 0 4px;
+    }
+
+    .sub-success .ico {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.15);
+      color: #10B981;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 14px;
+    }
+
+    .sub-success h3 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .sub-success p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .sub-fineprint {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 14px;
+      line-height: 1.55;
+      text-align: center;
+    }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .hidden { display: none !important; }
+
     .ph-note {
       margin: 0 14px;
       background: #fff;
@@ -509,6 +792,263 @@
       font-size: 14.5px;
       line-height: 1.55;
     }
+
+    /* ---------- Subscribe form ---------- */
+    .sub-form-wrap {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .sub-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .sub-card h3 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      margin-bottom: 6px;
+    }
+
+    .sub-card .sub-sub {
+      color: var(--muted);
+      font-size: 14.5px;
+      margin-bottom: 22px;
+    }
+
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .si-dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(108, 99, 255, 0.12);
+      color: var(--seed);
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 800;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .si-dot.active {
+      background: var(--seed);
+      color: #fff;
+    }
+
+    .si-dot.done {
+      background: #10B981;
+      color: #fff;
+    }
+
+    .si-bar {
+      flex: 1;
+      height: 2px;
+      background: rgba(108, 99, 255, 0.15);
+      border-radius: 2px;
+    }
+
+    .si-bar.done { background: #10B981; }
+
+    .phone-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .cc {
+      width: 92px;
+      padding: 14px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text);
+      text-align: center;
+    }
+
+    .cc:focus {
+      outline: none;
+      border-color: var(--seed);
+    }
+
+    .pn {
+      flex: 1;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      font-family: inherit;
+      font-size: 15px;
+      color: var(--text);
+      letter-spacing: 0.5px;
+    }
+
+    .pn:focus {
+      outline: none;
+      border-color: var(--seed);
+    }
+
+    .pn.invalid { border-color: #EF4444; }
+    .pn:disabled { opacity: 0.5; }
+
+    .hint {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .hint.err { color: #EF4444; }
+
+    .otp-row {
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .otp-box {
+      flex: 1;
+      aspect-ratio: 1;
+      max-width: 56px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 0;
+      font-family: inherit;
+    }
+
+    .otp-box:focus {
+      outline: none;
+      border-color: var(--seed);
+      box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.15);
+    }
+
+    .otp-box.filled {
+      border-color: var(--seed);
+      background: rgba(108, 99, 255, 0.08);
+    }
+
+    .sub-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .sub-actions .btn {
+      flex: 1;
+      justify-content: center;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--seed);
+      padding: 14px 18px;
+      border: none;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-ghost:hover { text-decoration: underline; }
+    .btn-ghost:disabled { opacity: 0.4; cursor: not-allowed; text-decoration: none; }
+
+    .resend-row {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .resend-row b {
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .success-card {
+      text-align: center;
+      padding: 16px 8px;
+    }
+
+    .success-ico {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #10B981, #059669);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 36px;
+      box-shadow: 0 14px 30px -10px rgba(16, 185, 129, 0.55);
+      animation: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .success-card h3 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .success-card p {
+      color: var(--muted);
+      font-size: 14.5px;
+      margin-bottom: 20px;
+    }
+
+    .summary {
+      background: var(--bg);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin: 18px 0 22px;
+      text-align: left;
+    }
+
+    .summary .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      font-size: 14px;
+    }
+
+    .summary .row + .row { border-top: 1px dashed var(--border); }
+
+    .summary .row span:first-child { color: var(--muted); }
+    .summary .row span:last-child { font-weight: 700; color: var(--text); }
+
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     /* ---------- Subscribe ---------- */
     .subscribe {
@@ -751,14 +1291,17 @@
         <div class="pill"><span class="dot"></span> Now available for Robi &amp; Airtel subscribers</div>
         <h1>Never miss a moment with <span class="gradient">Reminder24</span></h1>
         <p class="hero-sub">
-          Calendar Wala is your smart Bangla calendar and reminder companion. Plan your day, set reminders, organize tasks by category — all in one beautifully designed app.
+          Reminder 24 is your smart Bangla calendar and reminder companion. Plan your day, set reminders, organize tasks by category — all in one beautifully designed app.
         </p>
         <div class="hero-cta">
           <a href="#download" class="btn btn-primary" id="download-apk">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download APK
           </a>
-          <a href="#subscribe" class="btn btn-secondary">How to subscribe</a>
+          <a href="#subscribe-form" class="btn btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+            Subscribe
+          </a>
         </div>
         <div class="hero-meta">
           <span><span class="check">✓</span> Free to subscribe</span>
@@ -773,7 +1316,7 @@
             <div class="ph-header">
               <div class="ph-greet">Good morning</div>
               <div class="ph-title">Your reminders</div>
-              <div class="ph-date">Today • 3 notes</div>
+              <div class="ph-date">Today — 3 notes</div>
             </div>
             <div class="ph-stats">
               <div class="ph-stat"><div class="v">12</div><div class="l">Total notes</div></div>
@@ -796,10 +1339,10 @@
               </div>
             </div>
             <div class="ph-note">
-              <div class="ph-note-ico">🔔</div>
+              <div class="ph-note-ico"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
               <div>
                 <div class="t">Call mom</div>
-                <div class="s">Thu, Jul 29 • 6:00 PM</div>
+                <div class="s">Thu, Jul 29 — 6:00 PM</div>
               </div>
             </div>
           </div>
@@ -818,34 +1361,34 @@
       </div>
       <div class="features">
         <div class="feature">
-          <div class="feature-ico fi-purple">📅</div>
+          <div class="feature-ico fi-purple"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
           <h3>Smart calendar</h3>
           <p>Month, two-week and week views with color-coded event dots so you can scan your schedule at a glance.</p>
         </div>
         <div class="feature">
-          <div class="feature-ico fi-pink">🔔</div>
+          <div class="feature-ico fi-pink"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
           <h3>Reliable reminders</h3>
           <p>Push notifications fire on time, with a quick-view "Up next" widget on the home screen.</p>
         </div>
         <div class="feature">
-          <div class="feature-ico fi-green">✅</div>
+          <div class="feature-ico fi-green"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
           <h3>Task tracking</h3>
           <p>Mark tasks complete, monitor your progress, and keep your to-do list tidy with swipe-to-delete.</p>
         </div>
         <div class="feature">
-          <div class="feature-ico fi-amber">🏷️</div>
+          <div class="feature-ico fi-amber"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
           <h3>Categories</h3>
-          <p>Group notes by Work, Personal, Birthdays, Bills and more — each with its own color and icon.</p>
+          <p>Group notes by Work, Personal, Birthdays, Bills and more Ã¢â‚¬â€ each with its own color and icon.</p>
         </div>
         <div class="feature">
-          <div class="feature-ico fi-blue">🔍</div>
+          <div class="feature-ico fi-blue"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
           <h3>Instant search</h3>
           <p>Find any note, reminder or date in seconds with a fast, keyboard-friendly search.</p>
         </div>
         <div class="feature">
-          <div class="feature-ico fi-violet">🌙</div>
+          <div class="feature-ico fi-violet"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
           <h3>Light &amp; dark mode</h3>
-          <p>A polished Material 3 design that follows your system theme — easy on the eyes, day or night.</p>
+          <p>A polished Material 3 design that follows your system theme Ã¢â‚¬â€ easy on the eyes, day or night.</p>
         </div>
       </div>
     </div>
@@ -858,7 +1401,7 @@
         <div class="subscribe-inner">
           <div>
             <h2>Subscribe in 3 quick steps</h2>
-            <p>Calendar Wala works exclusively on the Robi and Airtel networks via bdapps. Subscribe once and enjoy uninterrupted reminders.</p>
+            <p>Reminder 24 works exclusively on the Robi and Airtel networks via bdapps. Subscribe once and enjoy uninterrupted reminders.</p>
             <ol class="steps">
               <li class="step">
                 <div class="step-num">1</div>
@@ -885,17 +1428,115 @@
           </div>
           <div class="price-card">
             <div class="label">Subscription</div>
-            <div class="price">৳ 2.78</div>
+            <div class="price">Ã Â§Â³ 2.78</div>
             <div class="per">per day, auto-renewed</div>
             <div class="includes">
               Includes VAT + SD + SC<br />
               Robi and Airtel subscribers only
             </div>
             <div class="pill-row">
-              <span class="carrier-pill">Robi · 016</span>
-              <span class="carrier-pill">Airtel · 018</span>
+              <span class="carrier-pill">Robi Ã‚· 016</span>
+              <span class="carrier-pill">Airtel Ã‚· 018</span>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subscribe form -->
+  <section id="subscribe-form">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Subscribe</div>
+        <h2>Activate Reminder24 right here</h2>
+        <p>Enter your Robi or Airtel number, confirm the OTP, and you'll be subscribed in seconds.</p>
+      </div>
+
+      <div class="sub-form-wrap">
+        <div class="sub-card">
+
+          <!-- Step indicator -->
+          <div class="step-indicator">
+            <div class="si-dot active" data-step-dot="1">1</div>
+            <div class="si-bar" data-step-bar="1"></div>
+            <div class="si-dot" data-step-dot="2">2</div>
+            <div class="si-bar" data-step-bar="2"></div>
+            <div class="si-dot" data-step-dot="3">3</div>
+          </div>
+
+          <!-- Step 1: phone -->
+          <div data-panel="phone">
+            <h3>Enter your mobile number</h3>
+            <p class="sub-sub">We'll send a 6-digit verification code via SMS.</p>
+
+            <div class="phone-row">
+              <input class="cc" type="text" value="+88" readonly aria-label="Country code" />
+              <input
+                class="pn"
+                type="tel"
+                inputmode="numeric"
+                maxlength="11"
+                placeholder="01XXXXXXXXX"
+                data-phone-input
+                autocomplete="tel"
+              />
+            </div>
+            <p class="hint" data-phone-hint>Enter your 11-digit Robi (016) or Airtel (018) number.</p>
+
+            <div class="sub-actions">
+              <button class="btn btn-primary" data-send-otp>
+                <span data-send-label>Send OTP</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: otp -->
+          <div data-panel="otp" hidden>
+            <h3>Enter the verification code</h3>
+            <p class="sub-sub">Code sent to <b data-otp-phone>your number</b>.</p>
+
+            <div class="otp-row" data-otp-row>
+              <input class="otp-box" type="tel" inputmode="numeric" maxlength="1" data-otp-idx="0" />
+              <input class="otp-box" type="tel" inputmode="numeric" maxlength="1" data-otp-idx="1" />
+              <input class="otp-box" type="tel" inputmode="numeric" maxlength="1" data-otp-idx="2" />
+              <input class="otp-box" type="tel" inputmode="numeric" maxlength="1" data-otp-idx="3" />
+              <input class="otp-box" type="tel" inputmode="numeric" maxlength="1" data-otp-idx="4" />
+              <input class="otp-box" type="tel" inputmode="numeric" maxlength="1" data-otp-idx="5" />
+            </div>
+
+            <p class="hint" data-otp-hint>The code expires in 5 minutes.</p>
+
+            <div class="sub-actions">
+              <button class="btn-ghost" data-change-number>Change number</button>
+              <button class="btn btn-primary" data-verify-otp>
+                <span data-verify-label>Verify &amp; Subscribe</span>
+              </button>
+            </div>
+
+            <p class="resend-row">
+              Didn't get it? <button class="btn-ghost" data-resend style="padding:0; font-size:13px;">Resend</button>
+              <span data-resend-timer></span>
+            </p>
+          </div>
+
+          <!-- Step 3: success -->
+          <div data-panel="success" hidden>
+            <div class="success-card">
+              <div class="success-ico">Ã¢Å“â€œ</div>
+              <h3>You're subscribed!</h3>
+              <p>Welcome to Reminder24. Your subscription is now active.</p>
+              <div class="summary">
+                <div class="row"><span>Mobile number</span><span data-sum-phone></span></div>
+                <div class="row"><span>Reference</span><span data-sum-ref></span></div>
+                <div class="row"><span>Daily charge</span><span>Ã Â§Â³ 2.78 (incl. VAT + SD + SC)</span></div>
+              </div>
+              <a href="#download" class="btn btn-primary" id="download-apk-success" style="width:100%; justify-content:center;">
+                Download the app
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -916,7 +1557,7 @@
   <!-- Footer -->
   <footer>
     <div class="container foot">
-      <div>© 2026 Calendar Wala · Reminder24. All rights reserved.</div>
+      <div>Ã‚© 2026 Reminder 24. All rights reserved.</div>
       <div>
         <a href="#features">Features</a>
         <a href="#subscribe">Subscribe</a>
@@ -926,12 +1567,377 @@
   </footer>
 
   <script>
-    // Placeholder hook — replace APK_DOWNLOAD_URL with the real link when ready.
-    const APK_DOWNLOAD_URL = '#'; // TODO: set APK link
-    const apkTargets = document.querySelectorAll('#download-apk, #download-apk-bottom, .nav-cta');
-    apkTargets.forEach((el) => {
-      el.setAttribute('href', APK_DOWNLOAD_URL);
+    /* ============================================================
+       Config
+       ============================================================ */
+    const APK_DOWNLOAD_URL = 'https://androidcontentapp.xyz/SDKreminder24/reminder24.apk';
+    const API_BASE = 'https://androidcontentapp.xyz/SDKreminder24';
+    const APP_ID = 'reminder24';
+    const OTP_LEN = 6;
+    const RESEND_SECONDS = 30;
+
+    /* ============================================================
+       APK links
+       ============================================================ */
+    document.querySelectorAll(
+      '#download-apk, #download-apk-bottom, #download-apk-success, .nav-cta'
+    ).forEach((el) => el.setAttribute('href', APK_DOWNLOAD_URL));
+
+    /* ============================================================
+       Element refs
+       ============================================================ */
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+    const phoneInput = $('[data-phone-input]');
+    const phoneHint = $('[data-phone-hint]');
+    const sendBtn = $('[data-send-otp]');
+    const sendLabel = $('[data-send-label]');
+
+    const otpInputs = $$('[data-otp-idx]').sort(
+      (a, b) => +a.dataset.otpIdx - +b.dataset.otpIdx
+    );
+    const otpPhone = $('[data-otp-phone]');
+    const otpHint = $('[data-otp-hint]');
+    const verifyBtn = $('[data-verify-otp]');
+    const verifyLabel = $('[data-verify-label]');
+    const changeBtn = $('[data-change-number]');
+    const resendBtn = $('[data-resend]');
+    const resendTimer = $('[data-resend-timer]');
+
+    const sumPhone = $('[data-sum-phone]');
+    const sumRef = $('[data-sum-ref]');
+
+    const panels = {
+      phone: $('[data-panel="phone"]'),
+      otp: $('[data-panel="otp"]'),
+      success: $('[data-panel="success"]'),
+    };
+
+    const dots = {
+      1: $('[data-step-dot="1"]'),
+      2: $('[data-step-dot="2"]'),
+      3: $('[data-step-dot="3"]'),
+    };
+    const bars = {
+      1: $('[data-step-bar="1"]'),
+      2: $('[data-step-bar="2"]'),
+    };
+
+    /* ============================================================
+       State
+       ============================================================ */
+    const state = {
+      phone: '',
+      referenceNo: '',
+      otp: '',
+      resendIn: 0,
+    };
+
+    /* ============================================================
+       UI helpers
+       ============================================================ */
+    function showPanel(name) {
+      Object.entries(panels).forEach(([k, el]) => {
+        el.hidden = k !== name;
+      });
+    }
+
+    function setStep(active) {
+      [1, 2, 3].forEach((n) => {
+        const d = dots[n];
+        d.classList.remove('active', 'done');
+        if (n < active) d.classList.add('done');
+        else if (n === active) d.classList.add('active');
+      });
+      [1, 2].forEach((n) => {
+        bars[n].classList.toggle('done', n < active);
+      });
+    }
+
+    function setBusy(btn, labelEl, busy, busyText, idleText) {
+      btn.disabled = busy;
+      labelEl.innerHTML = busy
+        ? `<span class="spinner"></span> ${busyText}`
+        : idleText;
+    }
+
+    function setHint(el, msg, isErr) {
+      el.textContent = msg;
+      el.classList.toggle('err', !!isErr);
+    }
+
+    function isValidPhone(p) {
+      return /^01(6|8)\d{8}$/.test(p);
+    }
+
+    /* ============================================================
+       API calls
+       ============================================================ */
+    async function sendOtpRequest(phone) {
+      const url = `${API_BASE}/send_otp.php`;
+      const body = new URLSearchParams({
+        user_mobile: phone,
+        app_id: APP_ID,
+      });
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body,
+      });
+      const json = await res.json().catch(() => ({}));
+      return json;
+    }
+
+    async function verifyOtpRequest(phone, otp, referenceNo) {
+      const url = `${API_BASE}/verify_otp.php`;
+      const body = new URLSearchParams({
+        Otp: otp,
+        referenceNo,
+        user_mobile: phone,
+        app_id: APP_ID,
+      });
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body,
+      });
+      const json = await res.json().catch(() => ({}));
+      return json;
+    }
+
+    /* ============================================================
+       Step 1: send OTP
+       ============================================================ */
+    async function onSendOtp() {
+      const phone = phoneInput.value.trim();
+      phoneInput.classList.remove('invalid');
+
+      if (!isValidPhone(phone)) {
+        phoneInput.classList.add('invalid');
+        setHint(
+          phoneHint,
+          'Please enter a valid 11-digit Robi (016) or Airtel (018) number.',
+          true
+        );
+        phoneInput.focus();
+        return;
+      }
+
+      setHint(phoneHint, 'Sending verification codeÃ¢â‚¬Â¦', false);
+      setBusy(sendBtn, sendLabel, true, 'SendingÃ¢â‚¬Â¦', 'Send OTP');
+
+      try {
+        const json = await sendOtpRequest(phone);
+        const ref =
+          json.referenceNo ||
+          json.reference_no ||
+          json.referenceID ||
+          json.reference_id;
+        const code = String(json.statusCode ?? '');
+        const ok =
+          json.success === true ||
+          code === 'S1000' ||
+          code === '200' ||
+          /success/i.test(json.message || '');
+
+        if (!ok || !ref) {
+          throw new Error(json.message || 'Could not send OTP. Please retry.');
+        }
+
+        state.phone = phone;
+        state.referenceNo = ref;
+        otpPhone.textContent = '+88' + phone;
+        clearOtp();
+        showPanel('otp');
+        setStep(2);
+        setHint(otpHint, 'Enter the 6-digit code we just sent.', false);
+        startResendCountdown();
+        otpInputs[0].focus();
+      } catch (err) {
+        setHint(
+          phoneHint,
+          (err && err.message) || 'Failed to send OTP. Please try again.',
+          true
+        );
+      } finally {
+        setBusy(sendBtn, sendLabel, false, '', 'Send OTP');
+      }
+    }
+
+    /* ============================================================
+       Step 2: OTP input handling
+       ============================================================ */
+    function clearOtp() {
+      state.otp = '';
+      otpInputs.forEach((b) => {
+        b.value = '';
+        b.classList.remove('filled');
+      });
+    }
+
+    function syncOtp() {
+      state.otp = otpInputs.map((b) => b.value).join('');
+      otpInputs.forEach((b) =>
+        b.classList.toggle('filled', b.value.length === 1)
+      );
+    }
+
+    otpInputs.forEach((box, i) => {
+      box.addEventListener('input', (e) => {
+        const v = e.target.value.replace(/\D/g, '');
+        e.target.value = v.slice(-1);
+        syncOtp();
+        if (v && i < otpInputs.length - 1) otpInputs[i + 1].focus();
+        if (state.otp.length === OTP_LEN) verifyBtn.focus();
+      });
+
+      box.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !box.value && i > 0) {
+          otpInputs[i - 1].focus();
+        }
+        if (e.key === 'ArrowLeft' && i > 0) otpInputs[i - 1].focus();
+        if (e.key === 'ArrowRight' && i < otpInputs.length - 1)
+          otpInputs[i + 1].focus();
+      });
+
+      box.addEventListener('paste', (e) => {
+        const data = (e.clipboardData || window.clipboardData)
+          .getData('text')
+          .replace(/\D/g, '')
+          .slice(0, OTP_LEN);
+        if (!data) return;
+        e.preventDefault();
+        otpInputs.forEach((b, idx) => {
+          b.value = data[idx] || '';
+        });
+        syncOtp();
+        const next = Math.min(data.length, otpInputs.length - 1);
+        otpInputs[next].focus();
+      });
     });
+
+    /* ============================================================
+       Step 2: verify OTP
+       ============================================================ */
+    async function onVerifyOtp() {
+      syncOtp();
+      if (state.otp.length !== OTP_LEN) {
+        setHint(otpHint, 'Please enter the full 6-digit code.', true);
+        return;
+      }
+
+      setHint(otpHint, 'VerifyingÃ¢â‚¬Â¦', false);
+      setBusy(verifyBtn, verifyLabel, true, 'VerifyingÃ¢â‚¬Â¦', 'Verify & Subscribe');
+
+      try {
+        const json = await verifyOtpRequest(
+          state.phone,
+          state.otp,
+          state.referenceNo
+        );
+        const code = String(json.statusCode ?? '');
+        const ok =
+          json.success === true ||
+          code === 'S1000' ||
+          code === '200' ||
+          /success/i.test(json.message || '');
+
+        if (!ok) {
+          throw new Error(json.message || 'Incorrect code. Please try again.');
+        }
+
+        sumPhone.textContent = '+88' + state.phone;
+        // (kept as +88 for display)
+        sumRef.textContent = state.referenceNo;
+        showPanel('success');
+        setStep(3);
+      } catch (err) {
+        setHint(otpHint, (err && err.message) || 'Verification failed.', true);
+        clearOtp();
+        otpInputs[0].focus();
+      } finally {
+        setBusy(verifyBtn, verifyLabel, false, '', 'Verify & Subscribe');
+      }
+    }
+
+    /* ============================================================
+       Resend / change number
+       ============================================================ */
+    function startResendCountdown() {
+      state.resendIn = RESEND_SECONDS;
+      resendBtn.disabled = true;
+      const tick = () => {
+        if (state.resendIn <= 0) {
+          resendTimer.textContent = '';
+          resendBtn.disabled = false;
+          return;
+        }
+        resendTimer.innerHTML = ` in <b>${state.resendIn}s</b>`;
+        state.resendIn -= 1;
+        setTimeout(tick, 1000);
+      };
+      tick();
+    }
+
+    async function onResend() {
+      if (resendBtn.disabled) return;
+      resendBtn.disabled = true;
+      setHint(otpHint, 'Resending codeÃ¢â‚¬Â¦', false);
+      try {
+        const json = await sendOtpRequest(state.phone);
+        const ref =
+          json.referenceNo ||
+          json.reference_no ||
+          json.referenceID ||
+          json.reference_id;
+        const code = String(json.statusCode ?? '');
+        const ok =
+          code === 'S1000' ||
+          code === '200' ||
+          /success/i.test(json.message || '');
+        if (!ok || !ref) throw new Error(json.message || 'Resend failed.');
+        state.referenceNo = ref;
+        clearOtp();
+        setHint(otpHint, 'A new code has been sent.', false);
+        otpInputs[0].focus();
+      } catch (err) {
+        setHint(otpHint, (err && err.message) || 'Resend failed.', true);
+        resendBtn.disabled = false;
+        return;
+      }
+      startResendCountdown();
+    }
+
+    function onChangeNumber() {
+      showPanel('phone');
+      setStep(1);
+      setHint(phoneHint, 'Enter your 11-digit Robi (016) or Airtel (018) number.', false);
+      phoneInput.focus();
+    }
+
+    /* ============================================================
+       Wire up
+       ============================================================ */
+    sendBtn.addEventListener('click', onSendOtp);
+    verifyBtn.addEventListener('click', onVerifyOtp);
+    resendBtn.addEventListener('click', onResend);
+    changeBtn.addEventListener('click', onChangeNumber);
+
+    phoneInput.addEventListener('input', () => {
+      phoneInput.value = phoneInput.value.replace(/\D/g, '').slice(0, 11);
+      phoneInput.classList.remove('invalid');
+      if (phoneHint.classList.contains('err')) {
+        setHint(phoneHint, 'Enter your 11-digit Robi (016) or Airtel (018) number.', false);
+      }
+    });
+
+    phoneInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') onSendOtp();
+    });
+
+    // Initialize hint
+    setHint(phoneHint, 'Enter your 11-digit Robi (016) or Airtel (018) number.', false);
   </script>
 
 </body>

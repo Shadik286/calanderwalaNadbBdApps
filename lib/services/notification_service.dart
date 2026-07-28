@@ -56,13 +56,13 @@ class NotificationService {
     await _plugin.zonedSchedule(
       note.notificationId,
       note.title.isEmpty ? 'Reminder' : note.title,
-      note.description.isEmpty ? 'You have a reminder in Calendar Wala' : note.description,
+      note.description.isEmpty ? 'You have a reminder in Reminder 24' : note.description,
       scheduledDate,
       const NotificationDetails(
         android: AndroidNotificationDetails(
           'calendar_wala_reminders',
           'Reminders',
-          channelDescription: 'Reminders for notes added in Calendar Wala',
+          channelDescription: 'Reminders for notes added in Reminder 24',
           importance: Importance.high,
           priority: Priority.high,
         ),

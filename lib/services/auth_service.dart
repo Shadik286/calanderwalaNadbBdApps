@@ -13,6 +13,9 @@ class AuthService {
   // Same base URL and endpoints as bdapps/lib/login.dart & home_page.dart.
   static const String baseUrl = 'https://androidcontentapp.xyz/SDKreminder24/';
 
+  // Same APP_ID as web/index.html (APP_ID = 'reminder24') and bdapps templates.
+  static const String appId = 'reminder24';
+
   // Pref keys for locally persisted auth state.
   static const _kIsLoggedIn = 'isLoggedIn';
   static const _kPhone = 'userPhone';
@@ -44,7 +47,7 @@ class AuthService {
       final res = await http
           .post(
             Uri.parse('${baseUrl}check_subscription.php'),
-            body: {'user_mobile': phone},
+            body: {'user_mobile': phone, 'app_id': appId},
           )
           .timeout(const Duration(seconds: 10));
       if (res.statusCode != 200) return false;
@@ -64,7 +67,7 @@ class AuthService {
     final res = await http
         .post(
           Uri.parse('${baseUrl}send_otp.php'),
-          body: {'user_mobile': phone},
+          body: {'msisdn': phone, 'app_id': appId},
         )
         .timeout(const Duration(seconds: 15));
     final data = jsonDecode(res.body);
@@ -84,6 +87,7 @@ class AuthService {
         'Otp': otp,
         'referenceNo': referenceNo,
         'user_mobile': phone,
+        'app_id': appId,
       },
     ).timeout(const Duration(seconds: 15));
     final data = jsonDecode(res.body);
@@ -124,7 +128,7 @@ class AuthService {
     final res = await http
         .post(
           Uri.parse('${baseUrl}unsubscribe.php'),
-          body: {'user_mobile': phone},
+          body: {'user_mobile': phone, 'app_id': appId},
         )
         .timeout(const Duration(seconds: 15));
     final data = jsonDecode(res.body);

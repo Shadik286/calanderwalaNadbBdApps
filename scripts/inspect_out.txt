@@ -1,0 +1,7 @@
+﻿Line 7:   <meta name="description" content="Reminder 24 â€” the smart Bangla calendar + reminder app for Robi and Airtel subscribers. Track notes, tasks and reminders in one place." />
+Line 1307:           <span><span class="check">âœ“</span> Free to subscribe</span>
+Line 1431:             <div class="price">Ã Â§Â³ 2.78</div>
+Line 1727:       setHint(phoneHint, 'Sending verification codeÃ¢â‚¬Â¦', false);
+Line 1728:       setBusy(sendBtn, sendLabel, true, 'SendingÃ¢â‚¬Â¦', 'Send OTP');
+Line 1830:       setHint(otpHint, 'VerifyingÃ¢â‚¬Â¦', false);
+Total: 1945

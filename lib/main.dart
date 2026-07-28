@@ -17,11 +17,11 @@ void main() {
   // Kick off notifications init in parallel with the auth gate.
   // ignore: discarded_futures
   NotificationService.instance.init();
-  runApp(const CalendarWalaApp());
+  runApp(const Reminder24App());
 }
 
-class CalendarWalaApp extends StatelessWidget {
-  const CalendarWalaApp({super.key});
+class Reminder24App extends StatelessWidget {
+  const Reminder24App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class CalendarWalaApp extends StatelessWidget {
       valueListenable: SettingsService.instance,
       builder: (context, settings, _) {
         return MaterialApp(
-          title: 'Calendar Wala',
+          title: 'Reminder 24',
           debugShowCheckedModeBanner: false,
           themeMode: settings.themeMode,
           theme: buildLightTheme(),
