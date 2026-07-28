@@ -1,38 +1,938 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#6C63FF" />
+  <meta name="description" content="Reminder24 (Calendar Wala) — the smart Bangla calendar + reminder app for Robi and Airtel subscribers. Track notes, tasks and reminders in one place." />
+  <title>Reminder24 — Calendar Wala</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --seed: #6C63FF;
+      --seed-dark: #4834D4;
+      --seed-light: #8E84FF;
+      --accent: #FF6584;
+      --bg: #F7F6FF;
+      --surface: #FFFFFF;
+      --text: #1A1626;
+      --muted: #6B6580;
+      --border: rgba(108, 99, 255, 0.12);
+      --shadow: 0 20px 50px -20px rgba(72, 52, 212, 0.35);
+    }
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+    html { scroll-behavior: smooth; }
 
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="$FLUTTER_BASE_HREF">
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="calendar_wala">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+    /* ---------- Header ---------- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(247, 246, 255, 0.85);
+      backdrop-filter: saturate(180%) blur(14px);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
 
-  <title>calendar_wala</title>
-  <link rel="manifest" href="manifest.json">
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--seed-light), var(--seed));
+      display: grid;
+      place-items: center;
+      box-shadow: 0 8px 20px -8px rgba(72, 52, 212, 0.55);
+      color: #fff;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-name {
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-name span {
+      color: var(--seed);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--seed); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--seed);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 6px 16px -6px rgba(108, 99, 255, 0.6);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px -8px rgba(108, 99, 255, 0.7);
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative;
+      padding: 80px 0 100px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(closest-side, rgba(108, 99, 255, 0.18), transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(108, 99, 255, 0.1);
+      color: var(--seed-dark);
+      border: 1px solid rgba(108, 99, 255, 0.2);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 600;
+      margin-bottom: 22px;
+    }
+
+    .pill .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--seed);
+      box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.2);
+    }
+
+    h1 {
+      font-size: clamp(36px, 5.4vw, 60px);
+      line-height: 1.08;
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      margin-bottom: 18px;
+    }
+
+    h1 .gradient {
+      background: linear-gradient(135deg, var(--seed), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 32px;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 26px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--seed-light), var(--seed));
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 28px 60px -22px rgba(72, 52, 212, 0.55);
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--seed);
+      color: var(--seed);
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 22px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 13.5px;
+      font-weight: 500;
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .check {
+      color: #10B981;
+      font-weight: 800;
+    }
+
+    /* ---------- Phone mock ---------- */
+    .phone-wrap {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .phone {
+      width: 280px;
+      height: 560px;
+      background: linear-gradient(160deg, var(--seed-light), var(--seed));
+      border-radius: 44px;
+      padding: 14px;
+      box-shadow: 0 40px 80px -30px rgba(72, 52, 212, 0.55),
+                  inset 0 0 0 2px rgba(255, 255, 255, 0.15);
+      position: relative;
+    }
+
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 22px;
+      background: #1A1626;
+      border-radius: 14px;
+      z-index: 2;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: #F7F6FF;
+      border-radius: 32px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ph-header {
+      background: linear-gradient(135deg, var(--seed-light), var(--seed));
+      padding: 48px 18px 22px;
+      color: #fff;
+    }
+
+    .ph-greet { font-size: 13px; opacity: 0.85; font-weight: 500; }
+    .ph-title { font-size: 22px; font-weight: 800; margin-top: 2px; }
+    .ph-date { font-size: 11.5px; opacity: 0.85; margin-top: 2px; }
+
+    .ph-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 14px 14px 0;
+    }
+
+    .ph-stat {
+      background: #fff;
+      border-radius: 12px;
+      padding: 10px 8px;
+      text-align: left;
+      border: 1px solid rgba(108, 99, 255, 0.08);
+    }
+
+    .ph-stat .v { font-weight: 800; font-size: 14px; color: var(--text); }
+    .ph-stat .l { font-size: 9.5px; font-weight: 600; color: var(--muted); margin-top: 2px; }
+
+    .ph-cal {
+      margin: 14px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 12px 10px;
+      border: 1px solid rgba(108, 99, 255, 0.08);
+    }
+
+    .ph-cal-h {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .ph-cal-h b { font-size: 12px; }
+
+    .ph-cal-h span {
+      font-size: 10px;
+      background: rgba(108, 99, 255, 0.12);
+      color: var(--seed-dark);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .ph-cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      text-align: center;
+    }
+
+    .ph-dow {
+      font-size: 9px;
+      color: var(--muted);
+      font-weight: 600;
+      padding: 4px 0;
+    }
+
+    .ph-day {
+      font-size: 10.5px;
+      padding: 5px 0;
+      border-radius: 8px;
+      font-weight: 600;
+      color: var(--text);
+      position: relative;
+    }
+
+    .ph-day.dim { color: #B8B5C8; }
+    .ph-day.today {
+      background: rgba(108, 99, 255, 0.18);
+      color: var(--seed);
+    }
+    .ph-day.sel {
+      background: var(--seed);
+      color: #fff;
+    }
+    .ph-day .dot {
+      position: absolute;
+      bottom: 1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .ph-note {
+      margin: 0 14px;
+      background: #fff;
+      border-radius: 14px;
+      padding: 12px;
+      border: 1px solid rgba(108, 99, 255, 0.08);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .ph-note-ico {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: rgba(255, 101, 132, 0.15);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+    }
+
+    .ph-note .t { font-size: 12px; font-weight: 700; }
+    .ph-note .s { font-size: 10px; color: var(--muted); margin-top: 1px; }
+
+    /* ---------- Features ---------- */
+    section {
+      padding: 90px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 56px;
+    }
+
+    .section-head .eyebrow {
+      color: var(--seed);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .feature {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .feature:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: rgba(108, 99, 255, 0.3);
+    }
+
+    .feature-ico {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      font-size: 22px;
+    }
+
+    .fi-purple { background: rgba(108, 99, 255, 0.12); color: var(--seed); }
+    .fi-pink { background: rgba(255, 101, 132, 0.12); color: var(--accent); }
+    .fi-green { background: rgba(16, 185, 129, 0.12); color: #10B981; }
+    .fi-amber { background: rgba(245, 158, 11, 0.12); color: #F59E0B; }
+    .fi-blue { background: rgba(59, 130, 246, 0.12); color: #3B82F6; }
+    .fi-violet { background: rgba(139, 92, 246, 0.12); color: #8B5CF6; }
+
+    .feature h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.55;
+    }
+
+    /* ---------- Subscribe ---------- */
+    .subscribe {
+      background: linear-gradient(135deg, var(--seed) 0%, var(--seed-dark) 100%);
+      border-radius: 32px;
+      padding: 64px 56px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .subscribe::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(closest-side, rgba(255, 101, 132, 0.35), transparent);
+      border-radius: 50%;
+    }
+
+    .subscribe::after {
+      content: '';
+      position: absolute;
+      bottom: -160px;
+      left: -120px;
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(closest-side, rgba(142, 132, 255, 0.4), transparent);
+      border-radius: 50%;
+    }
+
+    .subscribe-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .subscribe h2 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      margin-bottom: 14px;
+      line-height: 1.15;
+    }
+
+    .subscribe p {
+      opacity: 0.9;
+      font-size: 15.5px;
+      margin-bottom: 22px;
+    }
+
+    .steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .step b {
+      display: block;
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+
+    .step span {
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    .price-card {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 22px;
+      padding: 28px;
+      text-align: center;
+    }
+
+    .price-card .label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      font-weight: 700;
+      opacity: 0.85;
+      margin-bottom: 14px;
+    }
+
+    .price-card .price {
+      font-size: 52px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1;
+    }
+
+    .price-card .per {
+      font-size: 15px;
+      font-weight: 600;
+      opacity: 0.85;
+      margin-top: 4px;
+    }
+
+    .price-card .includes {
+      margin-top: 18px;
+      font-size: 13px;
+      opacity: 0.85;
+      line-height: 1.6;
+    }
+
+    .price-card .pill-row {
+      display: inline-flex;
+      gap: 6px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .carrier-pill {
+      background: rgba(255, 255, 255, 0.16);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* ---------- CTA ---------- */
+    .cta {
+      text-align: center;
+      padding: 70px 24px 100px;
+    }
+
+    .cta h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 14px;
+    }
+
+    .cta p {
+      color: var(--muted);
+      font-size: 17px;
+      margin-bottom: 30px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .foot a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 18px;
+    }
+
+    .foot a:hover { color: var(--seed); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 880px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .phone { width: 240px; height: 480px; }
+      .ph-stats { grid-template-columns: repeat(3, 1fr); }
+      .features { grid-template-columns: 1fr 1fr; }
+      .subscribe-inner { grid-template-columns: 1fr; gap: 32px; padding: 0; }
+      .subscribe { padding: 44px 28px; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 560px) {
+      .features { grid-template-columns: 1fr; }
+      .hero { padding: 50px 0 70px; }
+      section { padding: 60px 0; }
+      .nav-cta { display: none; }
+    }
+  </style>
 </head>
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand">
+        <div class="brand-mark">CAL</div>
+        <div class="brand-name">Calendar <span>Wala</span></div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#subscribe">Subscribe</a></li>
+        <li><a href="#download">Download</a></li>
+      </ul>
+      <a href="#download" class="nav-cta">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download APK
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="pill"><span class="dot"></span> Now available for Robi &amp; Airtel subscribers</div>
+        <h1>Never miss a moment with <span class="gradient">Reminder24</span></h1>
+        <p class="hero-sub">
+          Calendar Wala is your smart Bangla calendar and reminder companion. Plan your day, set reminders, organize tasks by category — all in one beautifully designed app.
+        </p>
+        <div class="hero-cta">
+          <a href="#download" class="btn btn-primary" id="download-apk">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download APK
+          </a>
+          <a href="#subscribe" class="btn btn-secondary">How to subscribe</a>
+        </div>
+        <div class="hero-meta">
+          <span><span class="check">✓</span> Free to subscribe</span>
+          <span><span class="check">✓</span> Cancel anytime</span>
+          <span><span class="check">✓</span> Works on Android</span>
+        </div>
+      </div>
+
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="ph-header">
+              <div class="ph-greet">Good morning</div>
+              <div class="ph-title">Your reminders</div>
+              <div class="ph-date">Today • 3 notes</div>
+            </div>
+            <div class="ph-stats">
+              <div class="ph-stat"><div class="v">12</div><div class="l">Total notes</div></div>
+              <div class="ph-stat"><div class="v">5/7</div><div class="l">Tasks done</div></div>
+              <div class="ph-stat"><div class="v">3</div><div class="l">Upcoming</div></div>
+            </div>
+            <div class="ph-cal">
+              <div class="ph-cal-h">
+                <b>July 2026</b>
+                <span>Month</span>
+              </div>
+              <div class="ph-cal-grid">
+                <div class="ph-dow">S</div><div class="ph-dow">M</div><div class="ph-dow">T</div><div class="ph-dow">W</div><div class="ph-dow">T</div><div class="ph-dow">F</div><div class="ph-dow">S</div>
+                <div class="ph-day dim">28</div><div class="ph-day dim">29</div><div class="ph-day dim">30</div>
+                <div class="ph-day">1</div><div class="ph-day">2</div><div class="ph-day">3</div><div class="ph-day">4</div>
+                <div class="ph-day">5</div><div class="ph-day">6</div><div class="ph-day">7</div><div class="ph-day">8</div><div class="ph-day">9</div><div class="ph-day">10</div><div class="ph-day">11</div>
+                <div class="ph-day">12</div><div class="ph-day">13</div><div class="ph-day">14</div><div class="ph-day">15</div><div class="ph-day">16</div><div class="ph-day">17</div><div class="ph-day">18</div>
+                <div class="ph-day">19</div><div class="ph-day">20</div><div class="ph-day">21</div><div class="ph-day">22</div><div class="ph-day">23</div><div class="ph-day">24</div><div class="ph-day">25</div>
+                <div class="ph-day">26</div><div class="ph-day today">27</div><div class="ph-day sel">28<span class="dot"></span></div><div class="ph-day">29<span class="dot"></span></div><div class="ph-day">30</div><div class="ph-day">31</div>
+              </div>
+            </div>
+            <div class="ph-note">
+              <div class="ph-note-ico">🔔</div>
+              <div>
+                <div class="t">Call mom</div>
+                <div class="s">Thu, Jul 29 • 6:00 PM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Features</div>
+        <h2>Everything you need to stay organized</h2>
+        <p>From birthdays to bill payments — Reminder24 keeps every commitment on your radar.</p>
+      </div>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-ico fi-purple">📅</div>
+          <h3>Smart calendar</h3>
+          <p>Month, two-week and week views with color-coded event dots so you can scan your schedule at a glance.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-ico fi-pink">🔔</div>
+          <h3>Reliable reminders</h3>
+          <p>Push notifications fire on time, with a quick-view "Up next" widget on the home screen.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-ico fi-green">✅</div>
+          <h3>Task tracking</h3>
+          <p>Mark tasks complete, monitor your progress, and keep your to-do list tidy with swipe-to-delete.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-ico fi-amber">🏷️</div>
+          <h3>Categories</h3>
+          <p>Group notes by Work, Personal, Birthdays, Bills and more — each with its own color and icon.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-ico fi-blue">🔍</div>
+          <h3>Instant search</h3>
+          <p>Find any note, reminder or date in seconds with a fast, keyboard-friendly search.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-ico fi-violet">🌙</div>
+          <h3>Light &amp; dark mode</h3>
+          <p>A polished Material 3 design that follows your system theme — easy on the eyes, day or night.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subscribe -->
+  <section id="subscribe">
+    <div class="container">
+      <div class="subscribe">
+        <div class="subscribe-inner">
+          <div>
+            <h2>Subscribe in 3 quick steps</h2>
+            <p>Calendar Wala works exclusively on the Robi and Airtel networks via bdapps. Subscribe once and enjoy uninterrupted reminders.</p>
+            <ol class="steps">
+              <li class="step">
+                <div class="step-num">1</div>
+                <div>
+                  <b>Open the app</b>
+                  <span>Launch Reminder24 on your Android phone.</span>
+                </div>
+              </li>
+              <li class="step">
+                <div class="step-num">2</div>
+                <div>
+                  <b>Enter your Robi or Airtel number</b>
+                  <span>Only 016 and 018 numbers are supported.</span>
+                </div>
+              </li>
+              <li class="step">
+                <div class="step-num">3</div>
+                <div>
+                  <b>Confirm via OTP</b>
+                  <span>You'll be auto-subscribed and redirected to your calendar in seconds.</span>
+                </div>
+              </li>
+            </ol>
+          </div>
+          <div class="price-card">
+            <div class="label">Subscription</div>
+            <div class="price">৳ 2.78</div>
+            <div class="per">per day, auto-renewed</div>
+            <div class="includes">
+              Includes VAT + SD + SC<br />
+              Robi and Airtel subscribers only
+            </div>
+            <div class="pill-row">
+              <span class="carrier-pill">Robi · 016</span>
+              <span class="carrier-pill">Airtel · 018</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="download" class="cta">
+    <div class="container">
+      <h2>Get Reminder24 today</h2>
+      <p>Download the APK and start organizing your day. Setup takes less than a minute.</p>
+      <a href="#" class="btn btn-primary" id="download-apk-bottom">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download APK
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container foot">
+      <div>© 2026 Calendar Wala · Reminder24. All rights reserved.</div>
+      <div>
+        <a href="#features">Features</a>
+        <a href="#subscribe">Subscribe</a>
+        <a href="#download">Download</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Placeholder hook — replace APK_DOWNLOAD_URL with the real link when ready.
+    const APK_DOWNLOAD_URL = '#'; // TODO: set APK link
+    const apkTargets = document.querySelectorAll('#download-apk, #download-apk-bottom, .nav-cta');
+    apkTargets.forEach((el) => {
+      el.setAttribute('href', APK_DOWNLOAD_URL);
+    });
+  </script>
+
 </body>
 </html>
